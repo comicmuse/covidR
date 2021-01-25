@@ -32,10 +32,13 @@ burndownzoo=zoo(burndown, order.by=seq(end(peopleleft), by=1, length=length(burn
 #Required Rate
 reqrate=round(tail(coredata(peopleleft),1) / as.numeric(as.Date("2021-02-15") - end(peopleleft)))
 
+#Merge all the timeseries into one zoo
 finalzoo=merge.zoo(target, peopleleft, burndownzoo, legacy, all=T, drop=F)
 
+#Draw the graph
 plot.zoo(finalzoo/1000000, plot.type="single", col=c(4,3,8,5), lty=c(1,1,5), lwd=2, xlab="Date",ylab="People (millions)", main="Vaccine Burndown (First Dose)")
-text (as.numeric(as.Date("2020-12-25")), 4, paste("Current Rate:   ",currentrate), adj=0)
-text (as.numeric(as.Date("2020-12-25")), 3.3, paste("Required Rate:",reqrate), adj=0)
-text (as.numeric(as.Date("2020-12-25")), 2.2, paste("Intercept:",end(burndownzoo)), adj=0)
-legend(as.numeric(as.Date("2021-02-02")), 14, legend=c("Target", "Remaining", "Forecast"), col=c(4,3,8,5), lty=c(1,1,5))
+grid (NA,NULL, lty = 6, col = "cornsilk2") 
+text (as.numeric(as.Date("2020-12-25")), 4, paste("Current Rate:   ",currentrate), adj=0, bg=0)
+text (as.numeric(as.Date("2020-12-25")), 3.3, paste("Required Rate:",reqrate), adj=0, bg=0)
+text (as.numeric(as.Date("2020-12-25")), 2.6, paste("Intercept:  ",end(burndownzoo)), adj=0, bg=0)
+legend(as.numeric(as.Date("2021-02-02")), 14, legend=c("Target", "Remaining", "Forecast"), col=c(4,3,8,5), lty=c(1,1,5), bg="white")
