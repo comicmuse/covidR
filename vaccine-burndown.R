@@ -2,11 +2,10 @@ library (curl)
 library (zoo)
 
 #Get the data
-#data <- read.csv(curl("https://coronavirus.data.gov.uk/api/v1/data?filters=areaType=overview&structure=%7B%22areaType%22:%22areaType%22,%22areaName%22:%22areaName%22,%22areaCode%22:%22areaCode%22,%22date%22:%22date%22,%22newPeopleVaccinatedFirstDoseByPublishDate%22:%22newPeopleVaccinatedFirstDoseByPublishDate%22,%22newPeopleVaccinatedSecondDoseByPublishDate%22:%22newPeopleVaccinatedSecondDoseByPublishDate%22,%22cumPeopleVaccinatedFirstDoseByPublishDate%22:%22cumPeopleVaccinatedFirstDoseByPublishDate%22,%22cumPeopleVaccinatedSecondDoseByPublishDate%22:%22cumPeopleVaccinatedSecondDoseByPublishDate%22%7D&format=csv"), header=TRUE, stringsAsFactors=FALSE)
-#data$date=as.Date(data$date)
+data <- read.csv(curl("https://coronavirus.data.gov.uk/api/v1/data?filters=areaType=overview&structure=%7B%22areaType%22:%22areaType%22,%22areaName%22:%22areaName%22,%22areaCode%22:%22areaCode%22,%22date%22:%22date%22,%22newPeopleVaccinatedFirstDoseByPublishDate%22:%22newPeopleVaccinatedFirstDoseByPublishDate%22,%22newPeopleVaccinatedSecondDoseByPublishDate%22:%22newPeopleVaccinatedSecondDoseByPublishDate%22,%22cumPeopleVaccinatedFirstDoseByPublishDate%22:%22cumPeopleVaccinatedFirstDoseByPublishDate%22,%22cumPeopleVaccinatedSecondDoseByPublishDate%22:%22cumPeopleVaccinatedSecondDoseByPublishDate%22%7D&format=csv"), header=TRUE, stringsAsFactors=FALSE)
+data$date=as.Date(data$date)
 
 #Legacy data
-
 legacy=zoo(c(seq(14366892,14366892,length=7), seq(14045222,14045222,length=7), seq(13686549, 13686549, length=7), 12713428), order.by=c(seq(as.Date("2020-12-20"), as.Date("2021-01-10"),1)))
 
 
@@ -39,3 +38,4 @@ plot.zoo(finalzoo/1000000, plot.type="single", col=c(4,3,8,5), lty=c(1,1,5), lwd
 text (as.numeric(as.Date("2020-12-25")), 4, paste("Current Rate:   ",currentrate), adj=0)
 text (as.numeric(as.Date("2020-12-25")), 3.3, paste("Required Rate:",reqrate), adj=0)
 text (as.numeric(as.Date("2020-12-25")), 2.2, paste("Intercept:",end(burndownzoo)), adj=0)
+legend(as.numeric(as.Date("2021-02-02")), 14, legend=c("Target", "Remaining", "Forecast"), col=c(4,3,8,5), lty=c(1,1,5))
