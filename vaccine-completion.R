@@ -32,4 +32,4 @@ finalzoo$legacytwelveweektarget<-lag(finalzoo$legacyfirst, k=84, na.pad=TRUE)
 #Draw the graph
 plot.zoo(finalzoo/1000000, plot.type="single", col=c(4,3,4,3,2,2), lwd=2, lty=c(1, 1, 1, 1, 4,4 ,4), xlab="Date",ylab="People (millions)", main="Vaccine Completion")
 
-legend(as.numeric(as.Date("2020-12-23")), 9, legend=c("First Doses", "Second Doses", "3-Week Target", "12-Week Target"), col=c(4,3,8,0), lty=c(1,1,5), bg="white")
+legend(as.numeric(as.Date("2020-12-23")), 9, legend=c("First Doses", "Second Doses", "3-Weeks", "12-Weeks"), col=c(4,3,8,0), lty=c(1,1,5), bg="white")

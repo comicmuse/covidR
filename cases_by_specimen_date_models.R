@@ -41,6 +41,6 @@ plot(finalmerge, plot.type="single", log="y", lty=c(1,1), type=c("b","b","l","l"
 
 tail ( recent, 1)
 
-summary(model0)
-summary(model1)
-summary(model2)
+summary(model0)$r.squared
+summary(model1)$r.squared
+summary(model2)$r.squared

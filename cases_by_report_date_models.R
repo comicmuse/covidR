@@ -8,10 +8,10 @@ casesbydate<- zoo(cases$newCasesByPublishDate, order.by=as.Date(cases$date))
 
 avecases<-rollmean(casesbydate, 7,align="right")
 
-elbow=10
+elbow=14
 
 
-allsince11<- avecases[index(avecases) >=as.Date("2021-01-14")]
+allsince11<- avecases[index(avecases) >=as.Date("2021-01-11")]
 
 firsttrend<-head(allsince11, elbow)
 
