@@ -16,7 +16,11 @@ drawingzoo=zoo(casesbyregion, order.by=as.Date(dates))
 drawingzoo=rollmean(drawingzoo, 7, align=c("right"))
 
 areas=colnames(casesbyregion)
-plot.zoo(drawingzoo, plot.type="single", log="y", col=c(1,2,3,4,5,6,7), lty=c(1, 1, 1, 1, 1, 1, 1), main="7-day Average of new cases - English Regions", ylab="Cases - Log scale", xlab="Date")
-grid(equilogs=F)
+jColors <- c('chartreuse2', 'cornflowerblue', 'darkgoldenrod1', 'peachpuff3',
+             'mediumorchid2', 'turquoise3', 'wheat4', 'slategray2', 'red')
 
-legend("topright", areas, col=c(1,2,3,4,5,6,7), lty=c(1, 1, 1, 1, 1, 1, 1), cex=.8, bg="white")
+
+
+plot.zoo(drawingzoo, plot.type="single", log="y", col=jColors, lwd=2,  main="7-day Average of new cases - English Regions", ylab="Cases - Log scale", xlab="Date")
+grid(equilogs=F)
+legend("topright", areas, col=jColors, lwd=2, lty=c(1, 1, 1, 1, 1, 1, 1), cex=.8, bg="white")
