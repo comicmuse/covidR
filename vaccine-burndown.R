@@ -42,7 +42,7 @@ plot.zoo(finalzoo/1000000, plot.type="single", col=c(4,3,8,5), lty=c(1,1,5), lwd
 text (as.numeric(as.Date("2020-12-25")), 4, paste("Current Rate:   ",currentrate), adj=0, bg=0)
 text (as.numeric(as.Date("2020-12-25")), 3.3, paste("Required Rate:",reqrate), adj=0, bg=0)
 text (as.numeric(as.Date("2020-12-25")), 2.6, paste("Yesterday: ",yesterdayrate), adj=0, bg=0)
-text (as.numeric(as.Date("2020-12-25")), 2, paste("Intercept:  ",end(burndownzoo)), adj=0, bg=0)
+text (as.numeric(as.Date("2020-12-25")), 2, paste("Intercept:  ",end(burndownzoo)+1), adj=0, bg=0)
 legend(as.numeric(as.Date("2021-02-02")), 14, legend=c("Target", "Remaining", "Projected"), col=c(4,3,8,5), lty=c(1,1,5), bg="white")
 
 tail (newfirst, 1)

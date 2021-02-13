@@ -8,7 +8,7 @@ casesbydate<- zoo(cases$newCasesByPublishDate, order.by=as.Date(cases$date))
 
 avecases<-rollmean(casesbydate, 7,align="right")
 
-allsince11<- avecases[index(avecases) >=as.Date("2021-01-11")]
+allsince11<- avecases[index(avecases) >=as.Date("2021-01-18")]
 
 model<-lm(log(allsince11) ~ as.numeric(time(allsince11)))
 
@@ -17,6 +17,6 @@ predictline=zoo(exp(predict(model, list(as.numeric(time(allsince11))))), order.b
 
 finalmerge=merge(allsince11, predictline)
 
-plot(finalmerge, plot.type="single", log="y", lty=c(1,1), type=c("b","l"), col=c("blue","red"), main=paste("7-day Ave Reported date - ", end ( recent, 1)), xlab="Date", ylab="7-day Ave New Cases")
+plot(finalmerge, plot.type="single", log="y", lty=c(1,1), type=c("b","l"), col=c("blue","red"), main=paste("7-day Ave Reported date - ", end ( allsince11)), xlab="Date", ylab="7-day Ave New Cases")
 
 legend("topright", paste("R-Squared: ", round(summary(model)$r.squared, 4)))
