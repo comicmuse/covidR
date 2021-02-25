@@ -31,8 +31,8 @@ predictline1=zoo(exp(predict(model1, list(as.numeric(time(firsttrend))))), order
 predictline2=zoo(exp(predict(model2, list(as.numeric(time(recent))))), order.by=time(recent))
 
 finalmerge=merge(firsttrend, recent)
-finalmerge=merge(finalmerge, predictline1)
-finalmerge=merge(finalmerge, predictline2)
+#finalmerge=merge(finalmerge, predictline1)
+#finalmerge=merge(finalmerge, predictline2)
 finalmerge=merge(finalmerge, predictline0)
 
 
