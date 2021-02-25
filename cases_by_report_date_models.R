@@ -9,7 +9,7 @@ casesbydate<- zoo(cases$newCasesByPublishDate, order.by=as.Date(cases$date))
 avecases<-rollmean(casesbydate, 7,align="right")
 
 allcases<- avecases[index(avecases) >=as.Date("2021-01-18")]
-allcases[seq(end(allcases)+1, as.Date("2021-05-01"), by=1)]=NA
+allcases[seq(end(allcases)+1, as.Date("2021-03-01"), by=1)]=NA 
 
 model<-lm(log(allcases) ~ as.numeric(time(allcases)))
 
