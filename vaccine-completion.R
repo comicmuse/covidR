@@ -21,7 +21,7 @@ currentrate=sum (tail(cumfirst - stats::lag(cumfirst, -1), 7)) / 7
 
 projectedfirst=seq(tail(coredata(cumfirst), 1), 50000000, by=currentrate)
 
-projectedfirstline=zoo(projectedfirst, order.by=seq(Sys.Date()-1, length=length(projectedfirst), by=1))
+projectedfirstline=zoo(projectedfirst, order.by=seq(tail(as.Date(time(cumfirst)), 1), length=length(projectedfirst), by=1))
 
 #Merge all the timeseries into one zoo
 finalzoo=merge.zoo(timeframe, cumfirst, cumsecond, projectedfirstline, all=T, drop=F)
