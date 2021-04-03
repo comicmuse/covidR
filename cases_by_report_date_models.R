@@ -9,19 +9,15 @@ casesbydate<- zoo(cases$newCasesByPublishDate, order.by=as.Date(cases$date))
 avecases<-rollmean(casesbydate, 7,align="right")
 
 allcases<- avecases[index(avecases) >=as.Date("2021-01-18")]
-allcases[seq(end(allcases)+1, as.Date("2021-03-01"), by=1)]=NA
 
-model<-lm(log(allcases) ~ as.numeric(time(allcases)))
+trend_start_date=as.Date("2021-03-30")
 
-predictline=zoo(exp(predict(model, list(as.numeric(time(allcases))))), order.by=time(allcases))
+model<-lm(log(allcases[index(allcases) >= trend_start_date]) ~ as.numeric(time(allcases[index(allcases) >= trend_start_date])))
 
-finalmerge=merge(allcases, predictline)
 
 ggplot( mapping=aes(x = time(allcases), y = coredata(allcases)) ) + 
-scale_y_log10() + geom_point(col="red",shape=1, fill="white", size=3) + geom_smooth(method="lm", fullrange=T)+
+scale_y_log10() + geom_point(col="red",shape=1, fill="white", size=3) + 
+geom_smooth(method="lm", mapping=aes(x = time(allcases[index(allcases) >= trend_start_date]), y = coredata(allcases[index(allcases) >=trend_start_date])) , level=.99)+
 labs(x="date", y="cases (log scale)", title="7-day average of New Cases")
 
-
-#plot(finalmerge, plot.type="single", log="y", lty=c(1,1), type=c("b","l"), col=c("blue","red"), main=paste("7-day Ave Reported date - ", end ( allcases)), xlab="Date", ylab="7-day Ave New Cases")
-#grid
-#legend("topright", paste("R-Squared: ", round(summary(model)$r.squared, 4)))
+summary(model)

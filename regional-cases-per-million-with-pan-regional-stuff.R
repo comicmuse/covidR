@@ -35,7 +35,7 @@ drawingzoo$"Northern Ireland"<- drawingzoo$"Northern Ireland"/1.885
 drawingzoo$England <-NULL
 
 
-autoplot.zoo(drawingzoo, facets=NULL)  + scale_y_continuous(trans='log10') + geom_smooth(method="lm", se=F) + 
+autoplot.zoo(drawingzoo, facets=NULL)  + scale_y_continuous(trans='log10') + #geom_smooth(method="lm", se=F) + 
 labs(title="Nations and English Regions 7-day Ave New Cases/million", x="Date", y="Cases/million (log scale)")
 
 
@@ -55,19 +55,22 @@ labs(title="Nations and English Regions 7-day Ave New Cases/million", x="Date", 
 
 
 
-#southzoo=merge(London=drawingzoo$London, "South East"=drawingzoo$"South East", "South West"=drawingzoo$"South West", "East of England"=drawingzoo$"East of England", Wales=drawingzoo$Wales)
-#northzoo=merge("North East"=drawingzoo$"North East", "North West"=drawingzoo$"North West", "East Midlands"=drawingzoo$"East Midlands", "West Midlands"=drawingzoo$"West Midlands", "Yorkshire and The Humber"=drawingzoo$"Yorkshire and The Humber")
-#celticnorthzoo=merge(Scotland=drawingzoo$Scotland, "Northern Ireland"=drawingzoo$"Northern Ireland")
+southzoo=merge(London=drawingzoo$London, "South East"=drawingzoo$"South East", "South West"=drawingzoo$"South West", "East of England"=drawingzoo$"East of England", Wales=drawingzoo$Wales)
+northzoo=merge("North East"=drawingzoo$"North East", "North West"=drawingzoo$"North West", "East Midlands"=drawingzoo$"East Midlands", "West Midlands"=drawingzoo$"West Midlands", "Yorkshire and The Humber"=drawingzoo$"Yorkshire and The Humber")
+celticnorthzoo=merge(Scotland=drawingzoo$Scotland, "Northern Ireland"=drawingzoo$"Northern Ireland")
 
-#autoplot.zoo(northzoo, facets=NULL) + scale_y_continuous(trans='log10') + 
-#labs(title="The North", x="Date", y="Cases/million (log scale)")+
+autoplot.zoo(northzoo, facets=NULL) + scale_y_continuous(trans='log10') + 
+labs(title="The North", x="Date", y="Cases/million (log scale)")
+#+
 # geom_smooth(method="lm", se=F, lwy=1) 
 
-#autoplot.zoo(southzoo, facets=NULL) + scale_y_continuous(trans='log10') + 
-#labs(title="The South", x="Date", y="Cases/million (log scale)")+
+autoplot.zoo(southzoo, facets=NULL) + scale_y_continuous(trans='log10') + 
+labs(title="The South", x="Date", y="Cases/million (log scale)")
+#+
 # geom_smooth(method="lm", se=F, lwy=1) 
 
 
-#autoplot.zoo(celticnorthzoo, facets=NULL) + scale_y_continuous(trans='log10') + 
-#labs(title="Scotland/NI", x="Date", y="Cases/million (log scale)")
+autoplot.zoo(celticnorthzoo, facets=NULL) + scale_y_continuous(trans='log10') + 
+labs(title="Scotland/NI", x="Date", y="Cases/million (log scale)")+
+ geom_smooth(method="lm", se=F, lwy=1) 
 

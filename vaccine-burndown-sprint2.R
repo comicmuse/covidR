@@ -48,6 +48,6 @@ text (as.numeric(as.Date("2020-12-25")), 6.5, paste("Current Rate:   ",currentra
 text (as.numeric(as.Date("2020-12-25")), 5, paste("Required Rate:",reqrate), adj=0, bg=0)
 text (as.numeric(as.Date("2020-12-25")), 3.5, paste("Yesterday: ",yesterdayrate), adj=0, bg=0)
 text (as.numeric(as.Date("2020-12-25")), 2, paste("Intercept:  ",end(burndownzoo)+1), adj=0, bg=0)
-legend(as.numeric(as.Date("2021-03-20")), 27, legend=c("Target", "Remaining", "Projected"), col=c(4,3,8,5), lty=c(1,1,5), bg="white")
+legend(as.numeric(as.Date("2021-03-14")), 30, legend=c("Target", "Remaining", "Projected"), col=c(4,3,8,5), lty=c(1,1,5), bg="white")
 
 tail (newfirst, 1)
