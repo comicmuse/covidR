@@ -10,7 +10,7 @@ avecases<-rollmean(casesbydate, 7,align="right")
 
 allcases<- avecases[index(avecases) >=as.Date("2021-01-18")]
 
-trend_start_date=as.Date("2021-03-30")
+trend_start_date=as.Date("2021-04-13")
 
 model<-lm(log(allcases[index(allcases) >= trend_start_date]) ~ as.numeric(time(allcases[index(allcases) >= trend_start_date])))
 

@@ -32,4 +32,4 @@ finalzoo$twelveweektarget=stats::lag(finalzoo$cumfirst, k=-84, na.pad=TRUE)
 #Draw the graph
 plot.zoo(finalzoo/1000000, plot.type="single",  col=c("blue","green","orange","red"), lwd=2, lty=c(1, 1, 4,5), xlab="Date",ylab="People (millions)", main="Vaccine Completion")
 
-legend(as.numeric(as.Date("2020-12-23")), 40, legend=c("First Doses", "Second Doses", "12-Weeks deadline"), col=c(4,3,2,0), lty=c(1,1,5), bg="white")
+legend(as.numeric(as.Date("2020-12-23")), 50, legend=c("First Doses", "Second Doses", "12-Weeks deadline"), col=c(4,3,2,0), lty=c(1,1,5), bg="white")
