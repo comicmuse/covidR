@@ -3,6 +3,7 @@ library(zoo)
 library(tidyr)
 library(dplyr)
 library(ggplot2)
+library(ragg)
 
 cases<-read.csv(curl("https://coronavirus.data.gov.uk/api/v1/data?filters=areaType=region;date>2021-01-15&structure=%7B%22areaType%22:%22areaType%22,%22areaName%22:%22areaName%22,%22areaCode%22:%22areaCode%22,%22date%22:%22date%22,%22newCasesByPublishDate%22:%22newCasesByPublishDate%22,%22cumCasesByPublishDate%22:%22cumCasesByPublishDate%22%7D&format=csv"), header=TRUE, stringsAsFactors=FALSE)
 nations<-read.csv(curl("https://coronavirus.data.gov.uk/api/v1/data?filters=areaType=nation;date>2021-01-15&structure=%7B%22areaType%22:%22areaType%22,%22areaName%22:%22areaName%22,%22areaCode%22:%22areaCode%22,%22date%22:%22date%22,%22newCasesByPublishDate%22:%22newCasesByPublishDate%22,%22cumCasesByPublishDate%22:%22cumCasesByPublishDate%22%7D&format=csv"), header=TRUE, stringsAsFactors=FALSE)
@@ -34,10 +35,10 @@ drawingzoo$Wales<- drawingzoo$Wales /3.13
 drawingzoo$"Northern Ireland"<- drawingzoo$"Northern Ireland"/1.885
 drawingzoo$England <-NULL
 
-
+agg_tiff("Outputs/CaseTrendRegions.tiff", units="in", width=8, height=7, res=800)
 autoplot.zoo(drawingzoo, facets=NULL)  + scale_y_continuous(trans='log10') + #geom_smooth(method="lm", se=F) + 
 labs(title="Nations and English Regions 7-day Ave New Cases/million", x="Date", y="Cases/million (log scale)")
-
+dev.off()
 
 
 
@@ -54,23 +55,30 @@ labs(title="Nations and English Regions 7-day Ave New Cases/million", x="Date", 
 
 
 
-
 southzoo=merge(London=drawingzoo$London, "South East"=drawingzoo$"South East", "South West"=drawingzoo$"South West", "East of England"=drawingzoo$"East of England", Wales=drawingzoo$Wales)
 northzoo=merge("North East"=drawingzoo$"North East", "North West"=drawingzoo$"North West", "East Midlands"=drawingzoo$"East Midlands", "West Midlands"=drawingzoo$"West Midlands", "Yorkshire and The Humber"=drawingzoo$"Yorkshire and The Humber")
 celticnorthzoo=merge(Scotland=drawingzoo$Scotland, "Northern Ireland"=drawingzoo$"Northern Ireland")
+dev.off()
 
-autoplot.zoo(northzoo, facets=NULL) + scale_y_continuous(trans='log10') + 
+agg_tiff("Outputs/CaseTrendNorth.tiff", units="in", width=8, height=7, res=800)
+autoplot.zoo(northzoo, facets=NULL) + scale_y_continuous(trans='log10', limits=c(10,1000) ) + 
 labs(title="The North", x="Date", y="Cases/million (log scale)")
 #+
 # geom_smooth(method="lm", se=F, lwy=1) 
+dev.off()
 
-autoplot.zoo(southzoo, facets=NULL) + scale_y_continuous(trans='log10') + 
+
+agg_tiff("Outputs/CaseTrendSouth.tiff", units="in", width=8, height=7, res=800)
+autoplot.zoo(southzoo, facets=NULL) + scale_y_continuous(trans='log10', limits=c(10,1000)) + 
 labs(title="The South", x="Date", y="Cases/million (log scale)")
 #+
 # geom_smooth(method="lm", se=F, lwy=1) 
+dev.off()
 
 
-autoplot.zoo(celticnorthzoo, facets=NULL) + scale_y_continuous(trans='log10') + 
+agg_tiff("Outputs/CaseTrendCelticNorth.tiff", units="in", width=8, height=7, res=800)
+autoplot.zoo(celticnorthzoo, facets=NULL) + scale_y_continuous(trans='log10', limits=c(10,1000)) + 
 labs(title="Scotland/NI", x="Date", y="Cases/million (log scale)")+
  geom_smooth(method="lm", se=F, lwy=1) 
+dev.off()
 
