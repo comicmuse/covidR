@@ -5,8 +5,8 @@ library(dplyr)
 library(ggplot2)
 library(ragg)
 
-cases<-read.csv(curl("https://coronavirus.data.gov.uk/api/v1/data?filters=areaType=region;date>2021-01-15&structure=%7B%22areaType%22:%22areaType%22,%22areaName%22:%22areaName%22,%22areaCode%22:%22areaCode%22,%22date%22:%22date%22,%22newCasesByPublishDate%22:%22newCasesByPublishDate%22,%22cumCasesByPublishDate%22:%22cumCasesByPublishDate%22%7D&format=csv"), header=TRUE, stringsAsFactors=FALSE)
-nations<-read.csv(curl("https://coronavirus.data.gov.uk/api/v1/data?filters=areaType=nation;date>2021-01-15&structure=%7B%22areaType%22:%22areaType%22,%22areaName%22:%22areaName%22,%22areaCode%22:%22areaCode%22,%22date%22:%22date%22,%22newCasesByPublishDate%22:%22newCasesByPublishDate%22,%22cumCasesByPublishDate%22:%22cumCasesByPublishDate%22%7D&format=csv"), header=TRUE, stringsAsFactors=FALSE)
+cases<-read.csv(curl("https://coronavirus.data.gov.uk/api/v1/data?filters=areaType=region;date>2021-01-01&structure=%7B%22areaType%22:%22areaType%22,%22areaName%22:%22areaName%22,%22areaCode%22:%22areaCode%22,%22date%22:%22date%22,%22newCasesByPublishDate%22:%22newCasesByPublishDate%22,%22cumCasesByPublishDate%22:%22cumCasesByPublishDate%22%7D&format=csv"), header=TRUE, stringsAsFactors=FALSE)
+nations<-read.csv(curl("https://coronavirus.data.gov.uk/api/v1/data?filters=areaType=nation;date>2021-01-01&structure=%7B%22areaType%22:%22areaType%22,%22areaName%22:%22areaName%22,%22areaCode%22:%22areaCode%22,%22date%22:%22date%22,%22newCasesByPublishDate%22:%22newCasesByPublishDate%22,%22cumCasesByPublishDate%22:%22cumCasesByPublishDate%22%7D&format=csv"), header=TRUE, stringsAsFactors=FALSE)
 
 casesbyregion<- cases %>% select (-areaCode, -areaType, -cumCasesByPublishDate) %>% pivot_wider(names_from = areaName, values_from=newCasesByPublishDate, values_fn=mean)
 casesbynation<- nations %>% select (-areaCode, -areaType, -cumCasesByPublishDate) %>% pivot_wider(names_from = areaName, values_from=newCasesByPublishDate, values_fn=mean)
@@ -60,25 +60,25 @@ northzoo=merge("North East"=drawingzoo$"North East", "North West"=drawingzoo$"No
 celticnorthzoo=merge(Scotland=drawingzoo$Scotland, "Northern Ireland"=drawingzoo$"Northern Ireland")
 dev.off()
 
-agg_tiff("Outputs/CaseTrendNorth.tiff", units="in", width=8, height=7, res=800)
+agg_png("Outputs/CaseTrendNorth.png", units="in", width=8, height=7, res=800)
 autoplot.zoo(northzoo, facets=NULL) + scale_y_continuous(trans='log10', limits=c(10,1000) ) + 
-labs(title="The North", x="Date", y="Cases/million (log scale)")
+labs(title="The North", x="Date", y="Cases/million (log scale)") + theme(legend.position="bottom")
 #+
 # geom_smooth(method="lm", se=F, lwy=1) 
 dev.off()
 
 
-agg_tiff("Outputs/CaseTrendSouth.tiff", units="in", width=8, height=7, res=800)
+agg_png("Outputs/CaseTrendSouth.png", units="in", width=8, height=7, res=800)
 autoplot.zoo(southzoo, facets=NULL) + scale_y_continuous(trans='log10', limits=c(10,1000)) + 
-labs(title="The South", x="Date", y="Cases/million (log scale)")
+labs(title="The South", x="Date", y="Cases/million (log scale)")+ theme(legend.position="bottom")
 #+
 # geom_smooth(method="lm", se=F, lwy=1) 
 dev.off()
 
 
-agg_tiff("Outputs/CaseTrendCelticNorth.tiff", units="in", width=8, height=7, res=800)
+agg_png("Outputs/CaseTrendCelticNorth.png", units="in", width=8, height=7, res=800)
 autoplot.zoo(celticnorthzoo, facets=NULL) + scale_y_continuous(trans='log10', limits=c(10,1000)) + 
-labs(title="Scotland/NI", x="Date", y="Cases/million (log scale)")+
- geom_smooth(method="lm", se=F, lwy=1) 
+labs(title="Scotland/NI", x="Date", y="Cases/million (log scale)")+ theme(legend.position="bottom")
+#+ geom_smooth(method="lm", se=F, lwy=1) 
 dev.off()
 
