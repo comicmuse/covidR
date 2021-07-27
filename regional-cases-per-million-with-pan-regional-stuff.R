@@ -35,10 +35,10 @@ drawingzoo$Wales<- drawingzoo$Wales /3.13
 drawingzoo$"Northern Ireland"<- drawingzoo$"Northern Ireland"/1.885
 drawingzoo$England <-NULL
 
-agg_tiff("Outputs/CaseTrendRegions.tiff", units="in", width=8, height=7, res=800)
-autoplot.zoo(drawingzoo, facets=NULL)  + scale_y_continuous(trans='log10') + #geom_smooth(method="lm", se=F) + 
-labs(title="Nations and English Regions 7-day Ave New Cases/million", x="Date", y="Cases/million (log scale)")
-dev.off()
+#agg_tiff("Outputs/CaseTrendRegions.tiff", units="in", width=8, height=7, res=800)
+#autoplot.zoo(drawingzoo, facets=NULL)  + scale_y_continuous(trans='log10') + #geom_smooth(method="lm", se=F) + 
+#labs(title="Nations and English Regions 7-day Ave New Cases/million", x="Date", y="Cases/million (log scale)")
+#dev.off()
 
 
 
@@ -58,18 +58,17 @@ dev.off()
 southzoo=merge(London=drawingzoo$London, "South East"=drawingzoo$"South East", "South West"=drawingzoo$"South West", "East of England"=drawingzoo$"East of England", Wales=drawingzoo$Wales)
 northzoo=merge("North East"=drawingzoo$"North East", "North West"=drawingzoo$"North West", "East Midlands"=drawingzoo$"East Midlands", "West Midlands"=drawingzoo$"West Midlands", "Yorkshire and The Humber"=drawingzoo$"Yorkshire and The Humber")
 celticnorthzoo=merge(Scotland=drawingzoo$Scotland, "Northern Ireland"=drawingzoo$"Northern Ireland")
-dev.off()
 
 agg_png("Outputs/CaseTrendNorth.png", units="in", width=8, height=7, res=800)
-autoplot.zoo(northzoo, facets=NULL) + scale_y_continuous(trans='log10', limits=c(10,1000) ) + 
-labs(title="The North", x="Date", y="Cases/million (log scale)") + theme(legend.position="bottom")
+autoplot.zoo(northzoo, facets=NULL) + scale_y_continuous(trans='log10', limits=c(10,2500) ) + 
+labs(title="The North", x="Date", y="Cases/million (log scaldev.newe)") + theme(legend.position="bottom")
 #+
 # geom_smooth(method="lm", se=F, lwy=1) 
 dev.off()
 
 
 agg_png("Outputs/CaseTrendSouth.png", units="in", width=8, height=7, res=800)
-autoplot.zoo(southzoo, facets=NULL) + scale_y_continuous(trans='log10', limits=c(10,1000)) + 
+autoplot.zoo(southzoo, facets=NULL) + scale_y_continuous(trans='log10', limits=c(10,2500)) + 
 labs(title="The South", x="Date", y="Cases/million (log scale)")+ theme(legend.position="bottom")
 #+
 # geom_smooth(method="lm", se=F, lwy=1) 
@@ -77,7 +76,7 @@ dev.off()
 
 
 agg_png("Outputs/CaseTrendCelticNorth.png", units="in", width=8, height=7, res=800)
-autoplot.zoo(celticnorthzoo, facets=NULL) + scale_y_continuous(trans='log10', limits=c(10,1000)) + 
+autoplot.zoo(celticnorthzoo, facets=NULL) + scale_y_continuous(trans='log10', limits=c(10,2500)) + 
 labs(title="Scotland/NI", x="Date", y="Cases/million (log scale)")+ theme(legend.position="bottom")
 #+ geom_smooth(method="lm", se=F, lwy=1) 
 dev.off()
